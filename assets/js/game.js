@@ -8,6 +8,7 @@ let wordPicked = wordChoices[Math.floor(Math.random() * wordChoices.length)];
 let incorrectGuesses = [];
 let lettersToGuess = [];
 let displayToUser = [];
+let letterCounter = 0;
 
 //Functions
 
@@ -18,14 +19,34 @@ function initialize () {
     incorrectGuesses = [];
     displayToUser = [];
     wordPicked = wordChoices[Math.floor(Math.random() * wordChoices.length)];
-    lettersToGuess = wordPicked.length;
     //loop through wordpicked and make letters display as _
     for (let i = 0; i < wordPicked.length; i++) {
         displayToUser[i] = "_";
     }
     console.log("Word looks like: " + displayToUser.join(" "));
     document.getElementById("word-text").innerHTML = displayToUser.join(" ");
-    
+    document.getElementById("directions-text").innerHTML = "Guess the word to make it to the crossing on time!"
+    document.getElementById("wins-text").innerHTML = "Wins: " + wins;
+    document.getElementById("losses-text").innerHTML = "Losses: " + losses;
+    document.getElementById("guesses-left-text").innerHTML = "Guesses remaining: " + guessesLeft;
+    document.getElementById("incorrect-guesses-text").innerHTML = "You have already guessed: " + "";
+    document.getElementById("notification").innerHTML = "";
+}
+
+function didYouWin () {
+    //converts what user has guessed to the word to see if all letters have been guessed
+    //wins, losses, resets accordingly 
+    if (letterCounter === wordPicked.length) {
+        wins++;
+        document.getElementById("wins-text").innerHTML = "Wins: " + wins;
+        initialize();
+    } else {
+        if (guessesLeft === 0) {
+            losses++;
+            document.getElementById("losses-text").innerHTML = "Losses: " + losses;
+            initialize();
+        }
+    }
 }
 
 initialize();
@@ -34,12 +55,6 @@ initialize();
 document.onkeyup = function(event) {
     
     let userGuess = event.key.toLowerCase();
-    //displays initial stats
-    document.getElementById("directions-text").innerHTML = "Guess the word to make it to the crossing on time!"
-    document.getElementById("wins-text").innerHTML = "Wins: " + wins;
-    document.getElementById("losses-text").innerHTML = "Losses: " + losses;
-    document.getElementById("guesses-left-text").innerHTML = "Guesses remaining: " + guessesLeft;
-    document.getElementById("incorrect-guesses-text").innerHTML = "You have already guessed: " + incorrectGuesses.join(", ");
     
     //if/else to determine if user guess is part of the word
     //guess gets displayed in correct place on word if right
@@ -50,9 +65,10 @@ document.onkeyup = function(event) {
                 displayToUser[i] = userGuess;
                 console.log(displayToUser);
                 document.getElementById("word-text").innerHTML = displayToUser.join(" ");
+                letterCounter++;
                 guessesLeft--;
                 document.getElementById("guesses-left-text").innerHTML = "Guesses remaining: " + guessesLeft;
-                lettersToGuess--;
+                didYouWin();
             }
         }
     } else {
@@ -62,20 +78,8 @@ document.onkeyup = function(event) {
             document.getElementById("incorrect-guesses-text").innerHTML = "You have already guessed: " + incorrectGuesses.join(", ");
             guessesLeft--; 
             document.getElementById("guesses-left-text").innerHTML = "Guesses remaining: " + guessesLeft;
+            didYouWin();
         }
     }
 
-    //converts what user has guessed to the word to see if all letters have been guessed
-    //wins, losses, resets accordingly 
-    if (wordPicked.toString() === displayToUser.toString()) {
-        wins++;
-        document.getElementById("notification").innerHTML = "Hooray! You made it to the crossing!";
-        initialize();
-    } else {
-        if (guessesLeft === 0) {
-            losses++;
-            document.getElementById("notification").innerHTML = "You have died of dysentery.";
-            initialize();
-        }
-    }
 }
