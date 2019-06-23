@@ -1,0 +1,9 @@
+1. Create a program that will randomly choose a word from a word bank 
+and hide the letters when it is displayed on the page. 
+2. Program a counter that will display the number of guesses the user has
+before they lose the game. 
+3. The counter should decrease each time a letter is guessed with key press.
+4. The incorrect guesses should be displayed so that the user can see what they have already tried. 
+5. If the word is guessed before the guesses decrement to 0, the user wins.
+6. If the word is not guessed before the guesses decrement to 0, the user loses. 
+7. Once a win or loss is incremented, the user gets a different word to guess and plays again. 
