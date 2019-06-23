@@ -27,8 +27,43 @@ function initialize () {
     document.getElementById("word-text").innerHTML = displayToUser.join(" ");
 }
 
+initialize();
+
 //playing the game: when user presses key to begin...
 document.onkeyup = function(event) {
+
     let userGuess = event.key.toLowerCase();
-    
+    //displays initial stats
+    document.getElementById("directions-text").innerHTML = "Guess the word to make it to the crossing on time!"
+    document.getElementById("wins-text").innerHTML = "Wins: " + wins;
+    document.getElementById("losses-text").innerHTML = "Losses: " + losses;
+    document.getElementById("guesses-left-text").innerHTML = "Guesses remaining: " + guessesLeft;
+    document.getElementById("incorrect-guesses-text").innerHTML = "You have already guessed: " + incorrectGuesses.join(", ");
+
+    if (wordPicked.indexOf(userGuess) > -1) {
+        for (let i = 0; i < wordPicked.length; i++) {
+            if (wordPicked[i] === userGuess) {
+                displayToUser[i] = userGuess;
+                console.log(displayToUser);
+                document.getElementById("word-text").innerHTML = displayToUser.join(" ");
+            }
+        }
+    } else {
+        if (!wordPicked.indexOf(userGuess) > -1) {
+            incorrectGuesses.push(userGuess);
+            console.log(incorrectGuesses);
+            document.getElementById("incorrect-guesses-text").innerHTML = "You have already guessed: " + incorrectGuesses.join(", ");
+        }
+    }
+    // for (let i = 0; i < wordPicked.length; i++) {
+    //     if (wordPicked[i] === userGuess) {
+    //         displayToUser[i] = userGuess;
+    //         console.log(displayToUser);
+    //         document.getElementById("word-text").innerHTML = displayToUser.join(" ");
+    //     } else if (wordPicked[i] !== userGuess) {
+    //         incorrectGuesses.push(userGuess);
+    //         console.log(incorrectGuesses);
+    //         document.getElementById("incorrect-guesses-text").innerHTML = "You have already guessed: " + incorrectGuesses.join(" ");
+    //     }
+    // }
 }
