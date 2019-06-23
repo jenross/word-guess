@@ -25,13 +25,14 @@ function initialize () {
     }
     console.log("Word looks like: " + displayToUser.join(" "));
     document.getElementById("word-text").innerHTML = displayToUser.join(" ");
+    
 }
 
 initialize();
 
 //playing the game: when user presses key to begin...
 document.onkeyup = function(event) {
-    lettersToGuess = wordPicked.length;
+    
     let userGuess = event.key.toLowerCase();
     //displays initial stats
     document.getElementById("directions-text").innerHTML = "Guess the word to make it to the crossing on time!"
@@ -65,11 +66,13 @@ document.onkeyup = function(event) {
     }
     //if the user wins by guessing in time message displays and game starts over
     //if the user does not win lose message displays and game starts over 
-    if (guessesLeft === 0 && lettersToGuess > 1) {
+    if (guessesLeft === 0 && lettersToGuess > 0) {
         document.getElementById("notification").innerHTML = "You have died of dysentery.";
         initialize();
-    } else if (guessesLeft > 0 && lettersToGuess === 0) {
+    } else {
+        if (guessesLeft >= 0 && lettersToGuess === 0) {
         document.getElementById("notification").innerHTML = "Hooray! You made it to the crossing!";
         initialize();
+        }
     }
 }
