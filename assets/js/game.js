@@ -36,7 +36,7 @@ function initialize () {
 function didYouWin () {
     //converts what user has guessed to the word to see if all letters have been guessed
     //wins, losses, resets accordingly 
-    if (letterCounter === wordPicked.length) {
+    if (letterCounter === wordPicked.length && guessesLeft > 0) {
         wins++;
         document.getElementById("wins-text").innerHTML = "Wins: " + wins;
         initialize();
