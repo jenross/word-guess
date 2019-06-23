@@ -64,15 +64,18 @@ document.onkeyup = function(event) {
             document.getElementById("guesses-left-text").innerHTML = "Guesses remaining: " + guessesLeft;
         }
     }
-    //if the user wins by guessing in time message displays and game starts over
-    //if the user does not win lose message displays and game starts over 
-    if (guessesLeft === 0 && lettersToGuess > 0) {
-        document.getElementById("notification").innerHTML = "You have died of dysentery.";
-        initialize();
-    } else {
-        if (guessesLeft >= 0 && lettersToGuess === 0) {
+
+    //converts what user has guessed to the word to see if all letters have been guessed
+    //wins, losses, resets accordingly 
+    if (wordPicked.toString() === displayToUser.toString()) {
+        wins++;
         document.getElementById("notification").innerHTML = "Hooray! You made it to the crossing!";
         initialize();
+    } else {
+        if (guessesLeft === 0) {
+            losses++;
+            document.getElementById("notification").innerHTML = "You have died of dysentery.";
+            initialize();
         }
     }
 }
