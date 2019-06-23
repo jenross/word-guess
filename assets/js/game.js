@@ -6,7 +6,7 @@ let guessesLeft = 12;
 let wordChoices = ["dysentery", "crossing", "cholera", "oxen", "yoke", "hunt", "wagon", "landmark", "typhoid", "measles"];
 let wordPicked = wordChoices[Math.floor(Math.random() * wordChoices.length)];
 let incorrectGuesses = [];
-let lettersToGuess = wordPicked.length;
+let lettersToGuess = [];
 let displayToUser = [];
 
 //Functions
@@ -31,7 +31,7 @@ initialize();
 
 //playing the game: when user presses key to begin...
 document.onkeyup = function(event) {
-
+    lettersToGuess = wordPicked.length;
     let userGuess = event.key.toLowerCase();
     //displays initial stats
     document.getElementById("directions-text").innerHTML = "Guess the word to make it to the crossing on time!"
@@ -39,13 +39,19 @@ document.onkeyup = function(event) {
     document.getElementById("losses-text").innerHTML = "Losses: " + losses;
     document.getElementById("guesses-left-text").innerHTML = "Guesses remaining: " + guessesLeft;
     document.getElementById("incorrect-guesses-text").innerHTML = "You have already guessed: " + incorrectGuesses.join(", ");
-
+    
+    //if/else to determine if user guess is part of the word
+    //guess gets displayed in correct place on word if right
+    //guess gets put in incorrect guesses if wrong 
     if (wordPicked.indexOf(userGuess) > -1) {
         for (let i = 0; i < wordPicked.length; i++) {
             if (wordPicked[i] === userGuess) {
                 displayToUser[i] = userGuess;
                 console.log(displayToUser);
                 document.getElementById("word-text").innerHTML = displayToUser.join(" ");
+                guessesLeft--;
+                document.getElementById("guesses-left-text").innerHTML = "Guesses remaining: " + guessesLeft;
+                lettersToGuess--;
             }
         }
     } else {
@@ -53,17 +59,17 @@ document.onkeyup = function(event) {
             incorrectGuesses.push(userGuess);
             console.log(incorrectGuesses);
             document.getElementById("incorrect-guesses-text").innerHTML = "You have already guessed: " + incorrectGuesses.join(", ");
+            guessesLeft--; 
+            document.getElementById("guesses-left-text").innerHTML = "Guesses remaining: " + guessesLeft;
         }
     }
-    // for (let i = 0; i < wordPicked.length; i++) {
-    //     if (wordPicked[i] === userGuess) {
-    //         displayToUser[i] = userGuess;
-    //         console.log(displayToUser);
-    //         document.getElementById("word-text").innerHTML = displayToUser.join(" ");
-    //     } else if (wordPicked[i] !== userGuess) {
-    //         incorrectGuesses.push(userGuess);
-    //         console.log(incorrectGuesses);
-    //         document.getElementById("incorrect-guesses-text").innerHTML = "You have already guessed: " + incorrectGuesses.join(" ");
-    //     }
-    // }
+    //if the user wins by guessing in time message displays and game starts over
+    //if the user does not win lose message displays and game starts over 
+    if (guessesLeft === 0 && lettersToGuess > 1) {
+        document.getElementById("notification").innerHTML = "You have died of dysentery.";
+        initialize();
+    } else if (guessesLeft > 0 && lettersToGuess === 0) {
+        document.getElementById("notification").innerHTML = "Hooray! You made it to the crossing!";
+        initialize();
+    }
 }
