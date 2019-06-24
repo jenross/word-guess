@@ -1,0 +1,16 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'PressStart', Arial, Helvetica, sans-serif;
+    font-size: 18px;
+}
+
+@font-face {
+    font-family: 'PressStart';
+    src: ('../fonts/PrStart.tttf');
+    src: ('../fonts/prstark.ttf');
+    font-weight: normal;
+    font-style: normal; 
+}
