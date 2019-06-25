@@ -24,9 +24,13 @@ body {
 }
 
 h1 {
-    font-size: 45px;
+    font-size: 40px;
     color: brown;
     text-align: center; 
+}
+
+.header-pic {
+    width: 100%;
 }
 
 .text-muted {
@@ -52,7 +56,7 @@ h1 {
 .word {
     border: 2px solid green;
     width: 350px;
-    height: 125px;
+    height: 95px;
     padding: 20px; 
 }
 
@@ -60,4 +64,14 @@ h1 {
     color: black;
     border: 2px solid black; 
     padding: 10px; 
+}
+
+#wagon-oxen {
+    width: 200px;
+    height: 100px;
+}
+
+#win-image, #lose-image {
+    width: 200px;
+    height: 200px;  
 }

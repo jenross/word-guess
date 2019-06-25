@@ -28,9 +28,9 @@ function initialize () {
     console.log("Word looks like: " + displayToUser.join(" "));
     document.getElementById("word-text").innerHTML = displayToUser.join(" ");
    
-
     document.getElementById("wins-text").innerHTML = "Wins: " + wins;
     document.getElementById("losses-text").innerHTML = "Losses: " + losses;
+    hideImages();
 }
 
 function didYouWin () {
@@ -39,17 +39,23 @@ function didYouWin () {
     if (letterCounter === wordPicked.length && guessesLeft >= 0) {
         wins++;
         document.getElementById("wins-text").innerHTML = "Wins: " + wins;
-        alert("You have made it to the next crossing!");
+        document.getElementById("win-image").style.display = "inline-block";
         initialize();
     } else {
         if (guessesLeft === 0) {
             losses++;
             document.getElementById("losses-text").innerHTML = "Losses: " + losses;
-            alert("You have died of dysentery.");
+            document.getElementById("lose-image").style.display = "inline-block";
             initialize();
         }
     }
 }
+
+function hideImages () {
+    document.getElementById("win-image").style.display = "none";
+    document.getElementById("lose-image").style.display = "none";
+}
+
 
 initialize();
 
