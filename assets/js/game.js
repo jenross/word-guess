@@ -8,12 +8,16 @@ let wordPicked = wordChoices[Math.floor(Math.random() * wordChoices.length)];
 let incorrectGuesses = [];
 let displayToUser = [];
 let letterCounter = 0;
+let winSound = new Audio("assets/sounds/win-sound.ogg");
+let loseSound = new Audio("assets/sounds/GameOver.wav");
 
 //Functions
 
 //sets up & clears guesses, letter counter, displays for hidden word(_); displays all game stats 
 //can use to get started and reset
 function initialize () {
+    winSound.pause();
+    loseSound.pause();
     letterCounter = 0;
     guessesLeft = 12;
     document.getElementById("guesses-left-text").innerHTML = "Guesses remaining: " + guessesLeft;
@@ -30,6 +34,7 @@ function initialize () {
    
     document.getElementById("wins-text").innerHTML = "Wins: " + wins;
     document.getElementById("losses-text").innerHTML = "Losses: " + losses;
+    document.getElementById("play-button").style.display = "none";
     hideImages();
 }
 
@@ -37,16 +42,20 @@ function didYouWin () {
     //converts what user has guessed to the word to see if all letters have been guessed
     //wins, losses, resets accordingly 
     if (letterCounter === wordPicked.length && guessesLeft >= 0) {
+        document.getElementById("word-text").innerHTML = wordPicked;
+        document.getElementById("win-image").style.display = "inline-block";
+        winSound.play();
         wins++;
         document.getElementById("wins-text").innerHTML = "Wins: " + wins;
-        document.getElementById("win-image").style.display = "inline-block";
-        initialize();
+        document.getElementById("play-button").style.display = "inline-block";
     } else {
         if (guessesLeft === 0) {
+            document.getElementById("word-text").innerHTML = wordPicked;
+            document.getElementById("lose-image").style.display = "inline-block";
+            loseSound.play();
             losses++;
             document.getElementById("losses-text").innerHTML = "Losses: " + losses;
-            document.getElementById("lose-image").style.display = "inline-block";
-            initialize();
+            document.getElementById("play-button").style.display = "inline-block";
         }
     }
 }
@@ -63,6 +72,7 @@ initialize();
 document.onkeyup = function(event) {
     
     let userGuess = event.key.toLowerCase();
+
     
     //if/else to determine if user guess is part of the word
     //guess gets displayed in correct place on word if right
@@ -76,8 +86,6 @@ document.onkeyup = function(event) {
                 document.getElementById("word-text").innerHTML = displayToUser.join(" ");
                 letterCounter++;
                 console.log("letters counted: " + letterCounter);
-                guessesLeft--;
-                document.getElementById("guesses-left-text").innerHTML = "Guesses remaining: " + guessesLeft;
                 didYouWin();
             }
         }
@@ -86,10 +94,9 @@ document.onkeyup = function(event) {
             incorrectGuesses.push(userGuess);
             console.log(incorrectGuesses);
             document.getElementById("incorrect-guesses-text").innerHTML = "You have already guessed: " + incorrectGuesses.join(", ");
-            guessesLeft--; 
-            document.getElementById("guesses-left-text").innerHTML = "Guesses remaining: " + guessesLeft;
             didYouWin();
         }
     }
-
+    guessesLeft--;
+    document.getElementById("guesses-left-text").innerHTML = "Guesses remaining: " + guessesLeft;
 }

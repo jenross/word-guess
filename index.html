@@ -18,19 +18,20 @@
             <h1 class="mt-3 mx-auto">The Oregon Trail Hangman</h1>
             <img class="header-pic" src="assets/images/ot_game_header.png" alt="brown border under header">
             <p id="directions-text" class="mt-2">Guess the word to travel the trail!</p>
-           
-            <div class="container mt-4 word">
-            <p id="word-text"></p>
+            
+            <div class="container mt-5 word d-inline-flex flex-row justify-content-around">
+                <button class="btn btn-primary mt-4 active" onclick="initialize()" role="button" type="button" id="play-button" aria-pressed="true">Play again</button>
+                <p id="word-text" class="ml-3"></p>
+                <img src="assets/images/ot_game_wagonox.png" alt="wagon and oxen" id="wagon-oxen" class="img-fluid">
             </div>
 
-            <div class="container guesses mt-3">
-            <img src="assets/images/ot_game_wagonox.png" alt="wagon and oxen" id="wagon-oxen">
+            <div class="container guesses mt-5">
             <p id="guesses-left-text" class="mt-2"></p>
             <p id="incorrect-guesses-text"class="mt-3"></p>
             </div>
         </div>
     
-        <div class="container grass mt-5">
+        <div class="container grass mt-4">
             <p id="wins-text" class="float-left mt-3"></p>
             <p id="losses-text" class="float-right mt-3"></p>
             <div id="win-lose-pic" class="container">

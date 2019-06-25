@@ -24,9 +24,20 @@ body {
 }
 
 h1 {
-    font-size: 40px;
+    font-size: 45px;
     color: brown;
     text-align: center; 
+}
+
+#play-button {
+    background-color: green;
+    border: black; 
+    padding: 15px; 
+    height: 50px; 
+}
+
+.btn:hover {
+    background-color: brown;
 }
 
 .header-pic {
@@ -51,14 +62,12 @@ h1 {
 #word-text {
     text-align: center;
     margin-top: 10px;
-}
-
-.word {
     border: 2px solid green;
     width: 350px;
     height: 95px;
-    padding: 20px; 
+    padding: 20px;
 }
+
 
 #wins-text, #losses-text {
     color: black;
@@ -68,10 +77,18 @@ h1 {
 
 #wagon-oxen {
     width: 200px;
-    height: 100px;
+    height: 100px; 
 }
 
 #win-image, #lose-image {
-    width: 200px;
-    height: 200px;  
+    width: 250px;
+    height: 250px;  
+}
+
+#win-image {
+    margin-left: 265px!important;
+}
+
+#lose-image {
+    margin-left: 250px!important; 
 }
