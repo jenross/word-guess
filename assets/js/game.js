@@ -13,7 +13,7 @@ let loseSound = new Audio("assets/sounds/GameOver.wav");
 
 //Functions
 
-//sets up & clears guesses, letter counter, displays for hidden word(_); displays all game stats 
+//sets up & clears guesses, letter counter, displays for hidden word(_); displays all game stats, hides play again button and win/lose images 
 //can use to get started and reset
 function initialize () {
     winSound.pause();
@@ -39,8 +39,9 @@ function initialize () {
 }
 
 function didYouWin () {
-    //converts what user has guessed to the word to see if all letters have been guessed
-    //wins, losses, resets accordingly 
+    //letter counter increments every time user guesses a letter in the word; this is compared to length of the word to see if all letters have been guessed
+    //wins nad losses increment accordingly 
+    //win/lose sound plays; win/lose image displays; word is shown regardless of win or loss
     if (letterCounter === wordPicked.length && guessesLeft >= 0) {
         document.getElementById("word-text").innerHTML = wordPicked;
         document.getElementById("win-image").style.display = "inline-block";
@@ -60,12 +61,13 @@ function didYouWin () {
     }
 }
 
+//hides win/lose images so that they don't display until a win or loss occurs
 function hideImages () {
     document.getElementById("win-image").style.display = "none";
     document.getElementById("lose-image").style.display = "none";
 }
 
-
+//sets game up to play
 initialize();
 
 //playing the game: when user presses key to begin...
@@ -75,8 +77,8 @@ document.onkeyup = function(event) {
 
     //if/else to determine if user guess is part of the word
     //guess gets displayed in correct place on word if right
-    //guess gets put in incorrect guesses if wrong
-    //didYouWin function called to determine if entire word was guessed in time; this function also initializes new round  
+    //guess gets put in incorrect guesses array and displayed if wrong
+    //didYouWin function called to determine if entire word was guessed in time 
     if (wordPicked.indexOf(userGuess) > -1) {
         for (let i = 0; i < wordPicked.length; i++) {
             if (wordPicked[i] === userGuess) {
@@ -96,6 +98,7 @@ document.onkeyup = function(event) {
             didYouWin();
         }
     }
+    //decrement each time user guesses a letter, whether incorrect or not
     guessesLeft--;
     document.getElementById("guesses-left-text").innerHTML = "Guesses remaining: " + guessesLeft;
 }
