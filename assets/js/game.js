@@ -49,7 +49,7 @@ function didYouWin () {
         document.getElementById("wins-text").innerHTML = "Wins: " + wins;
         document.getElementById("play-button").style.display = "inline-block";
     } else {
-        if (guessesLeft === 0) {
+        if (guessesLeft === 1) {
             document.getElementById("word-text").innerHTML = wordPicked;
             document.getElementById("lose-image").style.display = "inline-block";
             loseSound.play();
@@ -73,7 +73,6 @@ document.onkeyup = function(event) {
     
     let userGuess = event.key.toLowerCase();
 
-    
     //if/else to determine if user guess is part of the word
     //guess gets displayed in correct place on word if right
     //guess gets put in incorrect guesses if wrong
