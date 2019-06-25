@@ -19,7 +19,45 @@ body {
     font-size: 1rem;
     margin: 0;
     line-height: 1.5;
+    background-color: black;
+    color: white; 
 }
 
+h1 {
+    font-size: 45px;
+    color: brown;
+    text-align: center; 
+}
 
+.text-muted {
+    font-size: 12px;
+}
 
+.grass {
+    color: green;
+    width: 100%;
+    height: 200px;
+    background-color: green;
+}
+
+#directions-text {
+    text-align: center; 
+}
+
+#word-text {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.word {
+    border: 2px solid green;
+    width: 350px;
+    height: 125px;
+    padding: 20px; 
+}
+
+#wins-text, #losses-text {
+    color: black;
+    border: 2px solid black; 
+    padding: 10px; 
+}

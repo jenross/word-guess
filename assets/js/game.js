@@ -9,7 +9,6 @@ let incorrectGuesses = [];
 let displayToUser = [];
 let letterCounter = 0;
 
-document.getElementById("directions-text").innerHTML = "Guess the word to make it to the crossing on time!"
 //Functions
 
 //sets up & clears guesses, letter counter, displays for hidden word(_); displays all game stats 
